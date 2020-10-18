@@ -1,14 +1,14 @@
-package com.anifichadia.app.service.retrofit
+package com.anifichadia.sdknetworking.service.retrofit
 
-import com.anifichadia.app.service.ApiResult
-import com.anifichadia.app.service.ApiResult.Failure
-import com.anifichadia.app.service.ApiResult.FailureType.ResponseMapping
-import com.anifichadia.app.service.ApiResult.FailureType.ResponseWithStatus
-import com.anifichadia.app.service.ApiResult.FailureType.ResponseWithStatusAndError
-import com.anifichadia.app.service.ApiResult.FailureType.Ssl
-import com.anifichadia.app.service.ApiResult.FailureType.UnclassifiedException
-import com.anifichadia.app.service.ApiResult.Success
-import com.anifichadia.app.service.ResponseMapper
+import com.anifichadia.sdknetworking.service.ApiResult
+import com.anifichadia.sdknetworking.service.ApiResult.Failure
+import com.anifichadia.sdknetworking.service.ApiResult.FailureType.ResponseMapping
+import com.anifichadia.sdknetworking.service.ApiResult.FailureType.ResponseWithStatus
+import com.anifichadia.sdknetworking.service.ApiResult.FailureType.ResponseWithStatusAndError
+import com.anifichadia.sdknetworking.service.ApiResult.FailureType.Ssl
+import com.anifichadia.sdknetworking.service.ApiResult.FailureType.UnclassifiedException
+import com.anifichadia.sdknetworking.service.ApiResult.Success
+import com.anifichadia.sdknetworking.service.ResponseMapper
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit

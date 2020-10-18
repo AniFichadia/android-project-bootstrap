@@ -1,4 +1,4 @@
-package com.anifichadia.app.service
+package com.anifichadia.sdknetworking.service
 
 /**
  * @author Aniruddh Fichadia

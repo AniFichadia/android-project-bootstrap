@@ -1,11 +1,21 @@
-package com.anifichadia.app.service.retrofit.factory
+package com.anifichadia.sdknetworking.service.retrofit.factory
 
 import android.content.Context
-import com.anifichadia.app.service.*
-import com.anifichadia.app.service.retrofit.interceptor.HeaderAddingInterceptor
-import com.anifichadia.app.service.retrofit.interceptor.TimberHttpLoggingInterceptorLogger
-import com.anifichadia.app.service.retrofit.interceptor.UserAgentHeaderInterceptor
-import okhttp3.*
+import com.anifichadia.sdknetworking.service.CacheConfiguration
+import com.anifichadia.sdknetworking.service.ConnectionConfiguration
+import com.anifichadia.sdknetworking.service.ConnectionSecurityConfiguration
+import com.anifichadia.sdknetworking.service.HeaderConfiguration
+import com.anifichadia.sdknetworking.service.ServiceConfiguration
+import com.anifichadia.sdknetworking.service.TlsConfiguration
+import com.anifichadia.sdknetworking.service.retrofit.interceptor.HeaderAddingInterceptor
+import com.anifichadia.sdknetworking.service.retrofit.interceptor.TimberHttpLoggingInterceptorLogger
+import com.anifichadia.sdknetworking.service.retrofit.interceptor.UserAgentHeaderInterceptor
+import okhttp3.Cache
+import okhttp3.CertificatePinner
+import okhttp3.ConnectionPool
+import okhttp3.ConnectionSpec
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import java.io.File
 import java.util.concurrent.TimeUnit

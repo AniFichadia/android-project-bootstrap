@@ -1,6 +1,6 @@
-package com.anifichadia.app.service.retrofit.factory
+package com.anifichadia.sdknetworking.service.retrofit.factory
 
-import com.anifichadia.app.service.ServiceConfiguration
+import com.anifichadia.sdknetworking.service.ServiceConfiguration
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

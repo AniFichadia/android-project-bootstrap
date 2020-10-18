@@ -1,7 +1,8 @@
-package com.anifichadia.app.service
+package com.anifichadia.sdknetworking.service
 
-import com.anifichadia.app.service.client.HeaderEntryProvider
-import com.anifichadia.app.service.client.UserAgentEntryProvider
+import com.anifichadia.sdknetworking.service.TlsConfiguration.TLS
+import com.anifichadia.sdknetworking.service.client.HeaderEntryProvider
+import com.anifichadia.sdknetworking.service.client.UserAgentEntryProvider
 import java.util.concurrent.TimeUnit
 
 /**
@@ -26,7 +27,7 @@ class ConnectionConfiguration(
 )
 
 class ConnectionSecurityConfiguration(
-    val tlsConfiguration: Set<TlsConfiguration> = setOf(TlsConfiguration.TLS),
+    val tlsConfiguration: Set<TlsConfiguration> = setOf(TLS),
     val certificatePins: Map<String, List<String>>? = null
 )
 

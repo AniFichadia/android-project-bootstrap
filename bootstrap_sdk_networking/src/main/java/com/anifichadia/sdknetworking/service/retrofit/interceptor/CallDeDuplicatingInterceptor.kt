@@ -1,4 +1,4 @@
-package com.anifichadia.app.service.retrofit.interceptor
+package com.anifichadia.sdknetworking.service.retrofit.interceptor
 
 import okhttp3.Call
 import okhttp3.Interceptor
@@ -30,7 +30,8 @@ open class CallDeDuplicatingInterceptor(
         if (canDeDuplicateCall()) {
             val (identifiableCall, firstCallOfKind, lockForCall) = synchronized(fieldLock) {
                 val call = chain.call()
-                val existingEquivalentCall = activeCallCounts.keys.find { callEquivalenceComparator.compare(it, call) == 0 }
+                val existingEquivalentCall =
+                    activeCallCounts.keys.find { callEquivalenceComparator.compare(it, call) == 0 }
                 val identifiableCall = existingEquivalentCall ?: call
                 val firstCallOfKind = existingEquivalentCall == null
 

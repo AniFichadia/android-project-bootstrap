@@ -1,6 +1,6 @@
-package com.anifichadia.app.service.retrofit.interceptor
+package com.anifichadia.sdknetworking.service.retrofit.interceptor
 
-import com.anifichadia.app.service.client.HeaderEntryProvider
+import com.anifichadia.sdknetworking.service.client.HeaderEntryProvider
 import okhttp3.Request
 
 /**

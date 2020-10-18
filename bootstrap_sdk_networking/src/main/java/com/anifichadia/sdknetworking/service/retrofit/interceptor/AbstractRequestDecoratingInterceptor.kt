@@ -1,4 +1,4 @@
-package com.anifichadia.app.service.retrofit.interceptor
+package com.anifichadia.sdknetworking.service.retrofit.interceptor
 
 import okhttp3.Interceptor
 import okhttp3.Request

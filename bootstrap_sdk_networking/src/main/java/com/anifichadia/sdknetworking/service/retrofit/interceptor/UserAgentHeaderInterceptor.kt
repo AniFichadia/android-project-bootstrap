@@ -1,7 +1,7 @@
-package com.anifichadia.app.service.retrofit.interceptor
+package com.anifichadia.sdknetworking.service.retrofit.interceptor
 
-import com.anifichadia.app.service.client.UserAgentEntry
-import com.anifichadia.app.service.client.UserAgentEntryProvider
+import com.anifichadia.sdknetworking.service.client.UserAgentEntry
+import com.anifichadia.sdknetworking.service.client.UserAgentEntryProvider
 import okhttp3.Request
 
 /**
