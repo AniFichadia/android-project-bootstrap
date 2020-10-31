@@ -1,4 +1,4 @@
-package com.anifichadia.sdknetworking.service.client
+package com.anifichadia.bootstrap.service.client
 
 /**
  * @author Aniruddh Fichadia

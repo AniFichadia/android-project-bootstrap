@@ -1,9 +1,9 @@
-package com.anifichadia.sdknetworking.service
+package com.anifichadia.bootstrap.service
 
-import com.anifichadia.sdknetworking.service.TlsConfiguration.TLS
-import com.anifichadia.sdknetworking.service.client.HeaderEntryProvider
-import com.anifichadia.sdknetworking.service.client.UserAgentEntryProvider
-import java.util.concurrent.TimeUnit
+import com.anifichadia.bootstrap.service.TlsConfiguration.TLS
+import com.anifichadia.bootstrap.service.client.HeaderEntryProvider
+import com.anifichadia.bootstrap.service.client.UserAgentEntryProvider
+import java.util.*
 
 /**
  * @author Aniruddh Fichadia

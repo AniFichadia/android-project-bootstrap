@@ -1,6 +1,6 @@
-package com.anifichadia.sdknetworking.service.retrofit.typeconverter
+package com.anifichadia.bootstrap.service.retrofit.typeconverter
 
-import com.anifichadia.sdknetworking.service.Xml
+import com.anifichadia.bootstrap.service.Xml
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Converter

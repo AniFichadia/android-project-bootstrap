@@ -1,4 +1,4 @@
-package com.anifichadia.sdknetworking.service.retrofit.factory
+package com.anifichadia.bootstrap.service.retrofit.factory
 
 import okhttp3.OkHttpClient
 

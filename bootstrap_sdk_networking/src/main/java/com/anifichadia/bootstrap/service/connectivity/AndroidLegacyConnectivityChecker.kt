@@ -1,4 +1,4 @@
-package com.anifichadia.sdknetworking.service.connectivity
+package com.anifichadia.bootstrap.service.connectivity
 
 import android.content.Context
 import android.net.ConnectivityManager

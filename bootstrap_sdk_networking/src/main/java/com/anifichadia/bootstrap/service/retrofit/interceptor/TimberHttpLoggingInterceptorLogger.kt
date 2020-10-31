@@ -1,4 +1,4 @@
-package com.anifichadia.sdknetworking.service.retrofit.interceptor
+package com.anifichadia.bootstrap.service.retrofit.interceptor
 
 import okhttp3.logging.HttpLoggingInterceptor
 import timber.log.Timber

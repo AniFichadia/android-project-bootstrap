@@ -1,6 +1,6 @@
-package com.anifichadia.sdknetworking.service.retrofit.interceptor
+package com.anifichadia.bootstrap.service.retrofit.interceptor
 
-import com.anifichadia.sdknetworking.service.connectivity.ConnectivityChecker
+import com.anifichadia.bootstrap.service.connectivity.ConnectivityChecker
 import okhttp3.CacheControl
 import okhttp3.Request
 import java.util.concurrent.TimeUnit

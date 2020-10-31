@@ -1,15 +1,15 @@
-package com.anifichadia.sdknetworking.service.retrofit.factory
+package com.anifichadia.bootstrap.service.retrofit.factory
 
 import android.content.Context
-import com.anifichadia.sdknetworking.service.CacheConfiguration
-import com.anifichadia.sdknetworking.service.ConnectionConfiguration
-import com.anifichadia.sdknetworking.service.ConnectionSecurityConfiguration
-import com.anifichadia.sdknetworking.service.HeaderConfiguration
-import com.anifichadia.sdknetworking.service.ServiceConfiguration
-import com.anifichadia.sdknetworking.service.TlsConfiguration
-import com.anifichadia.sdknetworking.service.retrofit.interceptor.HeaderAddingInterceptor
-import com.anifichadia.sdknetworking.service.retrofit.interceptor.TimberHttpLoggingInterceptorLogger
-import com.anifichadia.sdknetworking.service.retrofit.interceptor.UserAgentHeaderInterceptor
+import com.anifichadia.bootstrap.service.CacheConfiguration
+import com.anifichadia.bootstrap.service.ConnectionConfiguration
+import com.anifichadia.bootstrap.service.ConnectionSecurityConfiguration
+import com.anifichadia.bootstrap.service.HeaderConfiguration
+import com.anifichadia.bootstrap.service.ServiceConfiguration
+import com.anifichadia.bootstrap.service.TlsConfiguration
+import com.anifichadia.bootstrap.service.retrofit.interceptor.HeaderAddingInterceptor
+import com.anifichadia.bootstrap.service.retrofit.interceptor.TimberHttpLoggingInterceptorLogger
+import com.anifichadia.bootstrap.service.retrofit.interceptor.UserAgentHeaderInterceptor
 import okhttp3.Cache
 import okhttp3.CertificatePinner
 import okhttp3.ConnectionPool

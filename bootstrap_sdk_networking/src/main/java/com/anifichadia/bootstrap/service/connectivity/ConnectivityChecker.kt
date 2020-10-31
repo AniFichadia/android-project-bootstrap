@@ -1,4 +1,4 @@
-package com.anifichadia.sdknetworking.service.connectivity
+package com.anifichadia.bootstrap.service.connectivity
 
 /**
  * @author Aniruddh Fichadia

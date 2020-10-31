@@ -1,4 +1,4 @@
-package com.anifichadia.sdknetworking.service
+package com.anifichadia.bootstrap.service
 
 import javax.net.ssl.SSLException
 
