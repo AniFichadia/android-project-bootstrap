@@ -48,15 +48,15 @@ class DefaultOkHttpClientFactory(
         connectionConfiguration: ConnectionConfiguration
     ) {
         // Configure timeouts
-        builder.readTimeout(connectionConfiguration.timeoutInSeconds, TimeUnit.SECONDS)
-            .connectTimeout(connectionConfiguration.timeoutInSeconds, TimeUnit.SECONDS)
+        builder.readTimeout(connectionConfiguration.timeoutMs, TimeUnit.MILLISECONDS)
+            .connectTimeout(connectionConfiguration.timeoutMs, TimeUnit.MILLISECONDS)
 
         // Configure the connection pool. Prevents failures due to the connection pool drying up
         builder.connectionPool(
             ConnectionPool(
                 connectionConfiguration.maxConnectionPoolIdleConnections,
-                connectionConfiguration.connectionKeepAliveTimeout,
-                connectionConfiguration.connectionKeepAliveTimeoutUnits
+                connectionConfiguration.connectionKeepAliveTimeoutMs,
+                TimeUnit.MILLISECONDS
             )
         )
     }

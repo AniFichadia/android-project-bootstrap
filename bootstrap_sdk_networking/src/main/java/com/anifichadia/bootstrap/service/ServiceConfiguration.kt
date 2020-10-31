@@ -11,23 +11,27 @@ import java.util.*
  */
 class ServiceConfiguration(
     val connectionConfiguration: ConnectionConfiguration,
-    val connectionSecurityConfiguration: ConnectionSecurityConfiguration,
-    val cacheConfiguration: CacheConfiguration,
-    val headerConfiguration: HeaderConfiguration
+    val connectionSecurityConfiguration: ConnectionSecurityConfiguration = ConnectionSecurityConfiguration(),
+
+    val cacheConfiguration: CacheConfiguration = CacheConfiguration(),
+
+    val headerConfiguration: HeaderConfiguration = HeaderConfiguration(),
+
+    val locale: Locale = Locale.ENGLISH,
 )
 
 class ConnectionConfiguration(
     val baseUrl: String,
 
-    val timeoutInSeconds: Long = 15,
+    val timeoutMs: Long = 15_000L,
 
     val maxConnectionPoolIdleConnections: Int = 20,
-    val connectionKeepAliveTimeout: Long = 30,
-    val connectionKeepAliveTimeoutUnits: TimeUnit = TimeUnit.SECONDS
+    val connectionKeepAliveTimeoutMs: Long = 30_000L,
 )
 
 class ConnectionSecurityConfiguration(
     val tlsConfiguration: Set<TlsConfiguration> = setOf(TLS),
+    /** Null values indicate no specific certificate pinner will be configured */
     val certificatePins: Map<String, List<String>>? = null
 )
 
@@ -38,7 +42,7 @@ enum class TlsConfiguration {
 class CacheConfiguration(
     val enabled: Boolean = true,
     val cacheDirectory: String = "NetworkCache",
-    val maxSizeInBytes: Long = 32 * 1024 * 1024 // 32 MB
+    val maxSizeInBytes: Long = 32 * 1024 * 1024 // 32 MiB
 )
 
 class HeaderConfiguration(

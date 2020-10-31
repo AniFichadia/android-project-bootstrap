@@ -14,16 +14,40 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import javax.net.ssl.SSLException
 
+
 /**
  * @author Aniruddh Fichadia
  * @date 2020-08-08
  */
-class RetrofitCallWrapper<NetworkResponseT, MappedT, NetworkErrorResponseT, ErrorT>(
-    private val retrofit: Retrofit,
-    private val responseMapper: ResponseMapper<Response<NetworkResponseT>, NetworkResponseT, MappedT>,
-    private val errorClass: Class<NetworkErrorResponseT>,
-    private val errorResponseMapper: ResponseMapper<Response<NetworkResponseT>, NetworkErrorResponseT, ErrorT>? = null
-) {
+class RetrofitCallWrapper<NetworkResponseT, MappedT, NetworkErrorResponseT, ErrorT> {
+
+    private val retrofit: Retrofit
+    private val responseMapper: ResponseMapper<Response<NetworkResponseT>, NetworkResponseT, MappedT>
+    private val errorClass: Class<NetworkErrorResponseT>?
+    private val errorResponseMapper: ResponseMapper<Response<NetworkResponseT>, NetworkErrorResponseT, ErrorT>?
+
+    constructor(
+        retrofit: Retrofit,
+        responseMapper: ResponseMapper<Response<NetworkResponseT>, NetworkResponseT, MappedT>,
+    ) {
+        this.retrofit = retrofit
+        this.responseMapper = responseMapper
+        this.errorClass = null
+        this.errorResponseMapper = null
+    }
+
+    constructor(
+        retrofit: Retrofit,
+        responseMapper: ResponseMapper<Response<NetworkResponseT>, NetworkResponseT, MappedT>,
+        errorClass: Class<NetworkErrorResponseT>,
+        errorResponseMapper: ResponseMapper<Response<NetworkResponseT>, NetworkErrorResponseT, ErrorT>,
+    ) {
+        this.retrofit = retrofit
+        this.responseMapper = responseMapper
+        this.errorClass = errorClass
+        this.errorResponseMapper = errorResponseMapper
+    }
+
 
     fun execute(call: Call<NetworkResponseT>): ApiResult<MappedT, ErrorT> {
         try {
@@ -41,7 +65,7 @@ class RetrofitCallWrapper<NetworkResponseT, MappedT, NetworkErrorResponseT, Erro
             } else {
                 val errorBody = response.errorBody()
 
-                if (errorResponseMapper != null && errorBody != null) {
+                if (errorResponseMapper != null && errorClass != null && errorBody != null) {
                     try {
                         val responseConverter =
                             retrofit.responseBodyConverter<NetworkErrorResponseT>(errorClass, emptyArray())
