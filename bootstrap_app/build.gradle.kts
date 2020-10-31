@@ -1,7 +1,7 @@
 import Versions.desugarJdkVersion
 
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     kotlin("android")
     kotlin("kapt")
 }
@@ -13,7 +13,6 @@ android {
         minSdkVersion(CommonAndroidConfig.minSdkVersion)
         targetSdkVersion(CommonAndroidConfig.targetSdkVersion)
 
-        applicationId = "com.anifichadia.app"
         versionCode = 1
         versionName = "1.0"
 
@@ -21,6 +20,10 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArgument("clearPackageData", "true")
+
+        testOptions {
+            execution = "ANDROIDX_TEST_ORCHESTRATOR"
+        }
     }
 
     compileOptions {
@@ -84,6 +87,8 @@ android {
 
 dependencies {
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:$desugarJdkVersion")
+
+    implementation(project(":bootstrap_sdk_networking"))
 
     Deps.kotlin(this)
     Deps.logging(this)
