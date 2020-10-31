@@ -1,4 +1,4 @@
-package com.anifichadia.app.shared
+package com.anifichadia.bootstrap.app.shared
 
 import java.io.OutputStream
 import java.io.PrintStream

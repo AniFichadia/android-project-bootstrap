@@ -1,4 +1,4 @@
-package com.anifichadia.app.shared
+package com.anifichadia.bootstrap.app.shared
 
 import android.view.View
 

@@ -1,4 +1,4 @@
-package com.anifichadia.app.framework.mvvm
+package com.anifichadia.bootstrap.app.framework.mvvm
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData

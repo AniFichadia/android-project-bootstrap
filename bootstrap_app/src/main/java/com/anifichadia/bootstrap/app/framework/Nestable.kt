@@ -1,4 +1,4 @@
-package com.anifichadia.app.framework
+package com.anifichadia.bootstrap.app.framework
 
 import android.app.Activity
 import android.view.View

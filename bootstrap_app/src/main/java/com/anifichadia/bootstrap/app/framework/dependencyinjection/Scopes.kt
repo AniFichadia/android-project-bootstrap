@@ -1,4 +1,4 @@
-package com.anifichadia.app.framework.dependencyinjection
+package com.anifichadia.bootstrap.app.framework.dependencyinjection
 
 import javax.inject.Scope
 

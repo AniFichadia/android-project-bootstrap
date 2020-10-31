@@ -1,4 +1,4 @@
-package com.anifichadia.app.shared
+package com.anifichadia.bootstrap.app.shared
 
 import java.lang.ref.WeakReference
 import kotlin.properties.ReadWriteProperty

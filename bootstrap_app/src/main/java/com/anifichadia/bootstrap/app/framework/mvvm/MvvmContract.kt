@@ -1,4 +1,4 @@
-package com.anifichadia.app.framework.mvvm
+package com.anifichadia.bootstrap.app.framework.mvvm
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -28,4 +28,6 @@ interface MvvmContract {
             coroutineSupervisor.cancel()
         }
     }
+
+    interface Navigation
 }

@@ -1,9 +1,11 @@
-package com.anifichadia.app.shared.dependencyinjection
+package com.anifichadia.bootstrap.app.shared.dependencyinjection
 
 import android.content.Context
-import com.anifichadia.app.AppConfiguration
+import com.anifichadia.bootstrap.app.AppConfiguration
 import com.anifichadia.app.BuildConfig
-import com.anifichadia.app.framework.dependencyinjection.ApplicationContext
+import com.anifichadia.bootstrap.app.framework.dependencyinjection.ApplicationContext
+import com.anifichadia.bootstrap.service.ConnectionConfiguration
+import com.anifichadia.bootstrap.service.ServiceConfiguration
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -27,6 +29,12 @@ class AppModule(
     @Singleton
     fun provideConfiguration(): AppConfiguration =
         AppConfiguration(
-            debug = BuildConfig.DEBUG
+            debug = BuildConfig.DEBUG,
+
+            serviceConfiguration = ServiceConfiguration(
+                ConnectionConfiguration(
+                    baseUrl = "https://placeholder.com/"
+                )
+            )
         )
 }

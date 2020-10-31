@@ -1,10 +1,9 @@
-package com.anifichadia.app
+package com.anifichadia.bootstrap.app
 
 import android.app.Application
-import com.anifichadia.app.shared.BlackHolePrintStream
-import com.anifichadia.app.shared.dependencyinjection.AppComponent
-import com.anifichadia.app.shared.dependencyinjection.AppModule
-import com.anifichadia.app.shared.dependencyinjection.DaggerAppComponent
+import com.anifichadia.bootstrap.app.shared.BlackHolePrintStream
+import com.anifichadia.bootstrap.app.shared.dependencyinjection.AppComponent
+import com.anifichadia.bootstrap.app.shared.dependencyinjection.AppModule
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -14,9 +13,10 @@ import javax.inject.Inject
  */
 class BootstrapApplication : Application() {
     val appComponent: AppComponent by lazy {
-        DaggerAppComponent.builder()
-            .appModule(appModule)
-            .build()
+//        DaggerAppComponent.builder()
+//            .appModule(appModule)
+//            .build()
+        TODO()
     }
     private val appModule: AppModule by lazy { AppModule(this) }
 

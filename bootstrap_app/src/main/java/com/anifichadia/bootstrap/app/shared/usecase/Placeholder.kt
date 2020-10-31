@@ -1,4 +1,4 @@
-package com.anifichadia.app.shared.usecase
+package com.anifichadia.bootstrap.app.shared.usecase
 
 /**
  * Shared use cases go here

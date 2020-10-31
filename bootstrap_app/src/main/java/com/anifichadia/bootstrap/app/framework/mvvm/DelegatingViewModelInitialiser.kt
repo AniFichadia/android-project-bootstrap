@@ -1,7 +1,5 @@
-package com.anifichadia.app.framework.mvvm
+package com.anifichadia.bootstrap.app.framework.mvvm
 
-import androidx.activity.ComponentActivity
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
@@ -17,29 +15,6 @@ object DelegatingViewModelInitialiser {
         noinline viewModelProvider: () -> ViewModelT
     ): ViewModelT = ViewModelProvider(
         storeOwner,
-        DelegatingViewModelFactory(
-            viewModelProvider
-        )
-    ).get(ViewModelT::class.java)
-
-
-    @Deprecated("Use forComponent() instead", replaceWith = ReplaceWith("forComponent"))
-    inline fun <reified ViewModelT : ViewModel> forActivity(
-        activity: ComponentActivity,
-        noinline viewModelProvider: () -> ViewModelT
-    ): ViewModelT = ViewModelProvider(
-        activity,
-        DelegatingViewModelFactory(
-            viewModelProvider
-        )
-    ).get(ViewModelT::class.java)
-
-    @Deprecated("Use forComponent() instead", replaceWith = ReplaceWith("forComponent"))
-    inline fun <reified ViewModelT : ViewModel> forFragment(
-        fragment: Fragment,
-        noinline viewModelProvider: () -> ViewModelT
-    ): ViewModelT = ViewModelProvider(
-        fragment,
         DelegatingViewModelFactory(
             viewModelProvider
         )

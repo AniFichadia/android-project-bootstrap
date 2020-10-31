@@ -1,4 +1,4 @@
-package com.anifichadia.app.shared.dependencyinjection
+package com.anifichadia.bootstrap.app.shared.dependencyinjection
 
 import dagger.Module
 
