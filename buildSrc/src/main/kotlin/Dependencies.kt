@@ -19,9 +19,12 @@ import Versions.okhttpVersion
 import Versions.retrofitVersion
 import Versions.timberVersion
 import Versions.uiAutomatorVersion
+import org.gradle.api.Action
 import org.gradle.api.artifacts.Dependency
+import org.gradle.api.artifacts.ExternalModuleDependency
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.artifacts.dsl.RepositoryHandler
+import org.gradle.kotlin.dsl.accessors.runtime.addDependencyTo
 import org.gradle.kotlin.dsl.kotlin
 
 object Versions {
@@ -52,7 +55,7 @@ object Versions {
     const val junitVersion = "4.12"
     const val mockitoVersion = "3.5.13"
 
-    const val androidXJunitVersion = "1.1.1"
+    const val androidXJunitVersion = "1.1.2"
     const val androidXEspressoVersion = "3.3.0"
     const val androidXTestVersion = "1.3.0"
     const val uiAutomatorVersion = "2.2.0"
@@ -70,6 +73,10 @@ object Deps {
         testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlinCoroutinesVersion")
     }
 
+    fun kotlinTesting(scope: DependencyHandler) = scope.apply {
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlinCoroutinesVersion")
+    }
+
     fun androidArchitecture(scope: DependencyHandler) = scope.apply {
         implementation("androidx.arch.core:core-common:$androidXArchCoreVersion")
         implementation("androidx.arch.core:core-runtime:$androidXArchCoreVersion")
@@ -79,7 +86,12 @@ object Deps {
         implementation("androidx.lifecycle:lifecycle-livedata:$androidXLifecycleVersion")
         implementation("androidx.lifecycle:lifecycle-viewmodel:$androidXLifecycleVersion")
 
-        testImplementation("androidx.arch.core:core-testing:$androidXArchCoreVersion")
+        androidArchitectureTesting(this, "test")
+//        testImplementation("androidx.arch.core:core-testing:$androidXArchCoreVersion")
+    }
+
+    fun androidArchitectureTesting(scope: DependencyHandler, baseConfiguration: String? = null) = scope.apply {
+        config(baseConfiguration, "implementation", "androidx.arch.core:core-testing:$androidXArchCoreVersion")
     }
 
     fun androidAnnotations(scope: DependencyHandler) = scope.apply {
@@ -123,14 +135,29 @@ object Deps {
     }
 
     fun unitTest(scope: DependencyHandler) = scope.apply {
-        testImplementation("junit:junit:$junitVersion")
-        testImplementation("org.mockito:mockito-core:$mockitoVersion")
+//        testImplementation("junit:junit:$junitVersion")
+//        testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion")
+//        testImplementation("org.mockito:mockito-core:$mockitoVersion")
+//        // TODO: for integration tests in SDKs, use wiremock for stub mocking
+        unitTest2(this, "test")
+    }
 
+    fun unitTest2(scope: DependencyHandler, baseConfiguration: String? = null) = scope.apply {
+        config(baseConfiguration, "implementation", "junit:junit:$junitVersion")
+        config(baseConfiguration, "implementation", "org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion")
+        config(baseConfiguration, "implementation", "org.mockito:mockito-core:$mockitoVersion")
         // TODO: for integration tests in SDKs, use wiremock for stub mocking
     }
 
     fun androidUiTest(scope: DependencyHandler) = scope.apply {
-        debugImplementation("androidx.fragment:fragment-testing:$androidXFragmentVersion")
+        debugImplementation("androidx.fragment:fragment-testing:$androidXFragmentVersion") {
+            exclude(
+                mapOf(
+                    "group" to "androidx.test",
+                    "module" to "core"
+                )
+            )
+        }
 
         androidTestImplementation("androidx.test:core:$androidXTestVersion")
         androidTestImplementation("androidx.test:core-ktx:$androidXTestVersion")
@@ -144,9 +171,33 @@ object Deps {
         androidTestImplementation("androidx.test.espresso.idling:idling-net:$androidXEspressoVersion")
         androidTestImplementation("androidx.test.ext:junit:$androidXJunitVersion")
         androidTestImplementation("androidx.test.ext:junit-ktx:$androidXJunitVersion")
-//        androidTestUtil("androidx.test.orchestrator:$androidXTestVersion")
-
+        androidTestUtil("androidx.test:orchestrator:$androidXTestVersion")
         androidTestImplementation("androidx.test.uiautomator:uiautomator:$uiAutomatorVersion")
+    }
+
+    fun androidUiTest2(scope: DependencyHandler) = scope.apply {
+        debugImplementation("androidx.fragment:fragment-testing:$androidXFragmentVersion") {
+            exclude(
+                mapOf(
+                    "group" to "androidx.test",
+                    "module" to "core"
+                )
+            )
+        }
+
+        implementation("androidx.test:core:$androidXTestVersion")
+        implementation("androidx.test:core-ktx:$androidXTestVersion")
+        implementation("androidx.test:runner:$androidXTestVersion")
+        implementation("androidx.test:rules:$androidXTestVersion")
+        implementation("androidx.test.espresso:espresso-core:$androidXEspressoVersion")
+        implementation("androidx.test.espresso:espresso-contrib:$androidXEspressoVersion")
+        implementation("androidx.test.espresso:espresso-intents:$androidXEspressoVersion")
+        implementation("androidx.test.espresso:espresso-idling-resource:$androidXEspressoVersion")
+        implementation("androidx.test.espresso.idling:idling-concurrent:$androidXEspressoVersion")
+        implementation("androidx.test.espresso.idling:idling-net:$androidXEspressoVersion")
+        implementation("androidx.test.ext:junit:$androidXJunitVersion")
+        implementation("androidx.test.ext:junit-ktx:$androidXJunitVersion")
+        implementation("androidx.test.uiautomator:uiautomator:$uiAutomatorVersion")
     }
 }
 
@@ -155,6 +206,16 @@ object Repos {
         google()
         jcenter()
     }
+}
+
+private fun DependencyHandler.`config`(
+    baseConfiguration: String?,
+    configurationName: String,
+    dependencyNotation: String
+): Dependency? = if (baseConfiguration != null) {
+    add("$baseConfiguration${configurationName[0].toUpperCase()}${configurationName.substring(1)}", dependencyNotation)
+} else {
+    add(configurationName, dependencyNotation)
 }
 
 
@@ -176,4 +237,14 @@ private fun DependencyHandler.`testImplementation`(dependencyNotation: Any): Dep
 
 private fun DependencyHandler.`androidTestImplementation`(dependencyNotation: Any): Dependency? =
     add("androidTestImplementation", dependencyNotation)
+
+private fun DependencyHandler.`debugImplementation`(
+    dependencyNotation: String,
+    dependencyConfiguration: Action<ExternalModuleDependency>
+): ExternalModuleDependency = addDependencyTo(
+    this, "debugImplementation", dependencyNotation, dependencyConfiguration
+)
+
+private fun DependencyHandler.`androidTestUtil`(dependencyNotation: Any): Dependency? =
+    add("androidTestUtil", dependencyNotation)
 
