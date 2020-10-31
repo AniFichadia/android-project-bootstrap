@@ -95,15 +95,4 @@ dependencies {
     Deps.unitTest(this)
 
     Deps.androidUiTest(this)
-
-//    Deps2.kotlin.install(this)
-//    Deps2.logging.install(this)
-//    Deps2.dependencyInjection.install(this)
-//    Deps2.androidArchitecture.install(this)
-//    Deps2.androidUi.install(this)
-//    Deps2.networkingStack.install(this)
-//
-//    Deps2.unitTest.install(this)
-//
-//    Deps2.androidUiTest.install(this)
 }
