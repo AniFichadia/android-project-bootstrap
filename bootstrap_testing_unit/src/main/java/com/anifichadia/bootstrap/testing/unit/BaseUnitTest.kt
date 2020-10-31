@@ -1,4 +1,4 @@
-package com.anifichadia.app
+package com.anifichadia.bootstrap.testing.unit
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import kotlinx.coroutines.Dispatchers
