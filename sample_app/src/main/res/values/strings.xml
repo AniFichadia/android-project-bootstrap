@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Woofyquiz</string>
+
+    <string name="main_multiple_choice_quiz">Multiple choice quiz</string>
+    <string name="main_multiple_choice_quiz_description">Pick the correct dog based on a picture!</string>
+
+    <string name="multiple_choice_quiz_loading">Loading quiz …</string>
+    <string name="multiple_choice_quiz_error">Error loading quiz</string>
+    <string name="multiple_choice_quiz_reload">Reload</string>
+
+    <string name="multiple_choice_quiz_answer_question">Using the above image, select the right breed below</string>
+
+    <string name="multiple_choice_quiz_answered_correctly">That\'s correct :)</string>
+    <string name="multiple_choice_quiz_answered_incorrectly">That\'s incorrect ;(</string>
+    <string name="multiple_choice_quiz_answered_result">It\'s a %s</string>
+    <string name="multiple_choice_quiz_next">Next</string>
+
+    <string name="quiz_results_result_greeting">You\'ve scored</string>
+    <string name="quiz_results_format_result">%1$d / %2$d</string>
+    <string name="quiz_results_exit">Exit</string>
+
+</resources>

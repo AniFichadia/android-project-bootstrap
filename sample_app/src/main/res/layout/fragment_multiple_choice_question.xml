@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="160dp">
+
+        <ImageView
+            android:id="@+id/multiple_choice_question_img_dog_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            tools:src="@mipmap/ic_launcher_round" />
+
+        <ProgressBar
+            android:id="@+id/multiple_choice_question_progress_image_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:visibility="visible"
+            tools:visibility="visible" />
+
+    </FrameLayout>
+
+    <TextView
+        style="@style/TextAppearance.AppCompat.Medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/multiple_choice_quiz_answer_question" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/multiple_choice_question_recyclerview_answers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:scrollbarStyle="outsideInset"
+        tools:itemCount="3"
+        tools:listitem="@layout/list_item_multiple_choice_quiz_answer" />
+
+</LinearLayout>
