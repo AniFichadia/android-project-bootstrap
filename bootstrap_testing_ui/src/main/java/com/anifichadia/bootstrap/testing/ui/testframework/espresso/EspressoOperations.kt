@@ -1,4 +1,4 @@
-package com.anifichadia.app.testframework.espresso
+package com.anifichadia.bootstrap.testing.ui.testframework.espresso
 
 import android.view.View
 import androidx.annotation.IdRes
@@ -13,8 +13,7 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayingAtLeast
 import androidx.test.espresso.matcher.ViewMatchers.withId
-import com.anifichadia.app.shared.NoOp
-import com.anifichadia.app.testframework.espresso.viewaction.WaitViewAction.Companion.waitFor
+import com.anifichadia.bootstrap.testing.ui.testframework.espresso.viewaction.WaitViewAction.Companion.waitFor
 import org.hamcrest.Matcher
 
 /**
@@ -63,7 +62,7 @@ object EspressoOperations {
             onView(matcher)
                 .perform(scrollTo())
         } catch (e: Throwable) {
-            NoOp("Swallowed")
+            // Swallowed
         }
     }
 

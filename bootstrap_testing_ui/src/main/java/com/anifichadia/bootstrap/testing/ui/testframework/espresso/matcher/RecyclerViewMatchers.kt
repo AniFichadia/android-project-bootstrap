@@ -1,4 +1,4 @@
-package com.anifichadia.app.testframework.espresso.matcher
+package com.anifichadia.bootstrap.testing.ui.testframework.espresso.matcher
 
 import android.content.res.Resources
 import android.view.View

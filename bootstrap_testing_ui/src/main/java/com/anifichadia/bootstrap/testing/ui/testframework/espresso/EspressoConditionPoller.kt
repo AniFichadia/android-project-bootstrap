@@ -1,4 +1,4 @@
-package com.anifichadia.app.testframework.espresso
+package com.anifichadia.bootstrap.testing.ui.testframework.espresso
 
 import androidx.test.espresso.NoMatchingRootException
 import androidx.test.espresso.NoMatchingViewException

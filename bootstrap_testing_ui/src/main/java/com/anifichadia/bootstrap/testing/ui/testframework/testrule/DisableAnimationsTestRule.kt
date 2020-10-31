@@ -1,4 +1,4 @@
-package com.anifichadia.app.testframework.testrule
+package com.anifichadia.bootstrap.testing.ui.testframework.testrule
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice

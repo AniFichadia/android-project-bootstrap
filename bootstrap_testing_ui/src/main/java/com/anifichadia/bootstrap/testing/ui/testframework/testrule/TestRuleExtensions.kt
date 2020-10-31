@@ -1,4 +1,4 @@
-package com.anifichadia.app.testframework.testrule
+package com.anifichadia.bootstrap.testing.ui.testframework.testrule
 
 import org.junit.runner.Description
 

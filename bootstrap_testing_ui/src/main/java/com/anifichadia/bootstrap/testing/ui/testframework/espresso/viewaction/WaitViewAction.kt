@@ -1,4 +1,4 @@
-package com.anifichadia.app.testframework.espresso.viewaction
+package com.anifichadia.bootstrap.testing.ui.testframework.espresso.viewaction
 
 import android.view.View
 import androidx.test.espresso.PerformException

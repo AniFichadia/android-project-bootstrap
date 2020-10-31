@@ -1,4 +1,4 @@
-package com.anifichadia.app.testframework.testrule
+package com.anifichadia.bootstrap.testing.ui.testframework.testrule
 
 import android.app.UiAutomation
 import android.os.Build

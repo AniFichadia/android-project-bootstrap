@@ -1,7 +1,7 @@
-package com.anifichadia.app.testframework.testrule
+package com.anifichadia.bootstrap.testing.ui.testframework.testrule
 
 import androidx.test.espresso.intent.Intents
-import com.anifichadia.app.testframework.testrule.IntentsTestRule.ChecksIntents
+import com.anifichadia.bootstrap.testing.ui.testframework.testrule.IntentsTestRule.ChecksIntents
 import org.junit.rules.TestRule
 import org.junit.runner.Description
 import org.junit.runners.model.Statement

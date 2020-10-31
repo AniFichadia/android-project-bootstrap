@@ -1,4 +1,4 @@
-package com.anifichadia.app.testframework.espresso
+package com.anifichadia.bootstrap.testing.ui.testframework.espresso
 
 import android.view.View
 import androidx.test.espresso.UiController
