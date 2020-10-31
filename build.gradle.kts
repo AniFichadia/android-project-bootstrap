@@ -14,6 +14,10 @@ allprojects {
     }
 }
 
+subprojects {
+    tasks.register("allDeps", DependencyReportTask::class)
+}
+
 tasks.register("clean", Delete::class) {
     delete(rootProject.buildDir)
 }
