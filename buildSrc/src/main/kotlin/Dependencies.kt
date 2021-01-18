@@ -10,6 +10,7 @@ import Versions.androidXJunitVersion
 import Versions.androidXLifecycleVersion
 import Versions.androidXRecyclerViewVersion
 import Versions.androidXTestVersion
+import Versions.baristaVersion
 import Versions.daggerVersion
 import Versions.junitVersion
 import Versions.kotlinCoroutinesVersion
@@ -24,14 +25,15 @@ import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.ExternalModuleDependency
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.artifacts.dsl.RepositoryHandler
+import org.gradle.internal.impldep.org.junit.experimental.categories.Categories.CategoryFilter.exclude
 import org.gradle.kotlin.dsl.accessors.runtime.addDependencyTo
 import org.gradle.kotlin.dsl.kotlin
 
 object Versions {
-    const val androidGradlePluginVersion = "4.1.0"
+    const val androidGradlePluginVersion = "4.1.1"
     const val desugarJdkVersion = "1.0.10"
 
-    const val kotlinVersion = "1.4.10"
+    const val kotlinVersion = "1.4.20"
     const val kotlinCoroutinesVersion = "1.3.9"
 
     const val androidXArchCoreVersion = "2.1.0"
@@ -59,6 +61,7 @@ object Versions {
     const val androidXEspressoVersion = "3.3.0"
     const val androidXTestVersion = "1.3.0"
     const val uiAutomatorVersion = "2.2.0"
+    const val baristaVersion = "3.7.0"
 }
 
 
@@ -70,11 +73,11 @@ object Deps {
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutinesVersion")
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-debug:$kotlinCoroutinesVersion")
 
-        testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlinCoroutinesVersion")
+        kotlinTesting(this, "test")
     }
 
-    fun kotlinTesting(scope: DependencyHandler) = scope.apply {
-        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlinCoroutinesVersion")
+    fun kotlinTesting(scope: DependencyHandler, baseConfiguration: String? = null) = scope.apply {
+        config(baseConfiguration, "implementation", "org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlinCoroutinesVersion")
     }
 
     fun androidArchitecture(scope: DependencyHandler) = scope.apply {
@@ -87,7 +90,6 @@ object Deps {
         implementation("androidx.lifecycle:lifecycle-viewmodel:$androidXLifecycleVersion")
 
         androidArchitectureTesting(this, "test")
-//        testImplementation("androidx.arch.core:core-testing:$androidXArchCoreVersion")
     }
 
     fun androidArchitectureTesting(scope: DependencyHandler, baseConfiguration: String? = null) = scope.apply {
@@ -135,10 +137,6 @@ object Deps {
     }
 
     fun unitTest(scope: DependencyHandler) = scope.apply {
-//        testImplementation("junit:junit:$junitVersion")
-//        testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion")
-//        testImplementation("org.mockito:mockito-core:$mockitoVersion")
-//        // TODO: for integration tests in SDKs, use wiremock for stub mocking
         unitTest2(this, "test")
     }
 
@@ -173,6 +171,14 @@ object Deps {
         androidTestImplementation("androidx.test.ext:junit-ktx:$androidXJunitVersion")
         androidTestUtil("androidx.test:orchestrator:$androidXTestVersion")
         androidTestImplementation("androidx.test.uiautomator:uiautomator:$uiAutomatorVersion")
+
+        androidTestImplementation("com.schibsted.spain:barista:$baristaVersion") {
+            exclude(
+                mapOf(
+                    "group" to "org.jetbrains.kotlin"
+                )
+            )
+        }
     }
 
     fun androidUiTest2(scope: DependencyHandler) = scope.apply {
@@ -184,6 +190,8 @@ object Deps {
                 )
             )
         }
+
+        kotlinTesting(this)
 
         implementation("androidx.test:core:$androidXTestVersion")
         implementation("androidx.test:core-ktx:$androidXTestVersion")
@@ -198,6 +206,14 @@ object Deps {
         implementation("androidx.test.ext:junit:$androidXJunitVersion")
         implementation("androidx.test.ext:junit-ktx:$androidXJunitVersion")
         implementation("androidx.test.uiautomator:uiautomator:$uiAutomatorVersion")
+
+        implementation("com.schibsted.spain:barista:$baristaVersion") {
+            exclude(
+                mapOf(
+                    "group" to "org.jetbrains.kotlin"
+                )
+            )
+        }
     }
 }
 
@@ -218,7 +234,6 @@ private fun DependencyHandler.`config`(
     add(configurationName, dependencyNotation)
 }
 
-
 // Unfortunately these extensions aren't available, so this is a backport for now
 private fun DependencyHandler.`kapt`(dependencyNotation: Any): Dependency? =
     add("kapt", dependencyNotation)
@@ -229,6 +244,13 @@ private fun DependencyHandler.`annotationProcessor`(dependencyNotation: Any): De
 private fun DependencyHandler.`implementation`(dependencyNotation: Any): Dependency? =
     add("implementation", dependencyNotation)
 
+private fun DependencyHandler.`implementation`(
+    dependencyNotation: String,
+    dependencyConfiguration: Action<ExternalModuleDependency>
+): ExternalModuleDependency = addDependencyTo(
+    this, "implementation", dependencyNotation, dependencyConfiguration
+)
+
 private fun DependencyHandler.`debugImplementation`(dependencyNotation: Any): Dependency? =
     add("debugImplementation", dependencyNotation)
 
@@ -237,6 +259,13 @@ private fun DependencyHandler.`testImplementation`(dependencyNotation: Any): Dep
 
 private fun DependencyHandler.`androidTestImplementation`(dependencyNotation: Any): Dependency? =
     add("androidTestImplementation", dependencyNotation)
+
+private fun DependencyHandler.`androidTestImplementation`(
+    dependencyNotation: String,
+    dependencyConfiguration: Action<ExternalModuleDependency>
+): ExternalModuleDependency = addDependencyTo(
+    this, "androidTestImplementation", dependencyNotation, dependencyConfiguration
+)
 
 private fun DependencyHandler.`debugImplementation`(
     dependencyNotation: String,

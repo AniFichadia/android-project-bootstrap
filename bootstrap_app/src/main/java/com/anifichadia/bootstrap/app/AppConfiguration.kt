@@ -1,6 +1,5 @@
 package com.anifichadia.bootstrap.app
 
-import com.anifichadia.app.BuildConfig
 import com.anifichadia.bootstrap.service.ServiceConfiguration
 
 /**

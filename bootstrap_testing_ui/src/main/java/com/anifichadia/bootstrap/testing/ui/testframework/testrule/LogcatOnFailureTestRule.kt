@@ -2,10 +2,8 @@ package com.anifichadia.bootstrap.testing.ui.testframework.testrule
 
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
-import org.junit.internal.AssumptionViolatedException
-import org.junit.rules.TestRule
+import org.junit.rules.TestWatcher
 import org.junit.runner.Description
-import org.junit.runners.model.Statement
 import java.util.concurrent.TimeUnit
 
 /**
@@ -16,56 +14,51 @@ import java.util.concurrent.TimeUnit
  */
 class LogcatOnFailureTestRule(
     private val enabled: Boolean = true
-) : TestRule {
+) : TestWatcher() {
 
-    override fun apply(base: Statement, description: Description) = object : Statement() {
-        override fun evaluate() {
-            if (enabled) {
-                val testName = description.toString()
-                val testStartMessage = "TestRunner: started: $testName"
-                val testEndMessage = "TestRunner: finished: $testName"
-                val testFailedMessage = "TestRunner: failed: $testName"
+    override fun starting(description: Description?) {
+        super.starting(description)
+
+        if (enabled) {
+            clearLogcat()
+        }
+    }
+
+    override fun failed(e: Throwable, description: Description) {
+        super.failed(e, description)
+
+        if (enabled) {
+            val testName = description.toString()
+            val testStartMessage = "TestRunner: started: $testName"
+            val testEndMessage = "TestRunner: finished: $testName"
+            val testFailedMessage = "TestRunner: failed: $testName"
+
+            val logcatOutput = retrieveLogcatOutput()
+            if (logcatOutput != null) {
+                val logcatOutputLines = logcatOutput.split("\n")
+                // TODO if required: .filter { it.contains(android.os.Process.myPid().toString() }
+
+                val startLineIndex = logcatOutputLines
+                    .indexOfLast { it.contains(testStartMessage) }
+                    .takeIf { it >= 0 }
+                    ?: 0
+                val endLineIndex = logcatOutputLines
+                    .indexOfLast { it.contains(testEndMessage) || it.contains(testFailedMessage) }
+                    .takeIf { it >= 0 }
+                    ?: logcatOutputLines.size - 1
+
+                val testOutputLines = logcatOutputLines.subList(startLineIndex, endLineIndex).joinToString("\n")
 
                 clearLogcat()
 
-                try {
-                    base.evaluate()
-                } catch (e: AssumptionViolatedException) {
-                    // Test has been skipped, just propagate this exception as this is understood by the test runner
-                    throw e
-                } catch (e: Throwable) {
-                    val logcatOutput = retrieveLogcatOutput()
-                    if (logcatOutput != null) {
-                        val logcatOutputLines = logcatOutput.split("\n")
-                        // TODO if required: .filter { it.contains(android.os.Process.myPid().toString() }
-
-                        val startLineIndex = logcatOutputLines
-                            .indexOfLast { it.contains(testStartMessage) }
-                            .takeIf { it >= 0 }
-                            ?: 0
-                        val endLineIndex = logcatOutputLines
-                            .indexOfLast { it.contains(testEndMessage) || it.contains(testFailedMessage) }
-                            .takeIf { it >= 0 }
-                            ?: logcatOutputLines.size - 1
-
-                        val testOutputLines = logcatOutputLines.subList(startLineIndex, endLineIndex).joinToString("\n")
-
-                        clearLogcat()
-
-                        throw Exception(
-                            """
+                throw Exception(
+                    """
 ========== logcat output ==========
 $testOutputLines
 =================================== 
                         """.trimIndent(),
-                            e
-                        )
-                    } else {
-                        throw e
-                    }
-                }
-            } else {
-                base.evaluate()
+                    e
+                )
             }
         }
     }

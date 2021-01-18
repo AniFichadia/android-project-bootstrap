@@ -1,5 +1,5 @@
 object CommonAndroidConfig {
     const val compileSdkVersion = 30
     const val targetSdkVersion = compileSdkVersion
-    const val minSdkVersion = 18
+    const val minSdkVersion = 19
 }

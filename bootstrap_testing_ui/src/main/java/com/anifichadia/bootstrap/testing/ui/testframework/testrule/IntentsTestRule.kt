@@ -2,9 +2,8 @@ package com.anifichadia.bootstrap.testing.ui.testframework.testrule
 
 import androidx.test.espresso.intent.Intents
 import com.anifichadia.bootstrap.testing.ui.testframework.testrule.IntentsTestRule.ChecksIntents
-import org.junit.rules.TestRule
+import org.junit.rules.TestWatcher
 import org.junit.runner.Description
-import org.junit.runners.model.Statement
 
 /**
  * If you're using espresso's [Intents] class, this helps manage initing and releasing it in a guaranteed way.
@@ -14,35 +13,28 @@ import org.junit.runners.model.Statement
  * @author Aniruddh Fichadia
  * @date 2020-10-09
  */
-class IntentsTestRule : TestRule {
+class IntentsTestRule : TestWatcher() {
 
-    override fun apply(base: Statement, description: Description) = object : Statement() {
-        override fun evaluate() {
-            val annotation = description.retrieveAnnotation(ChecksIntents::class.java)
-            val requiresIntents = annotation?.enabled ?: false
+    private var requiresIntents: Boolean = false
 
-            if (requiresIntents) {
-                wrap {
-                    base.evaluate()
-                }
-            } else {
-                base.evaluate()
-            }
+    override fun starting(description: Description) {
+        super.starting(description)
+
+        val annotation = description.retrieveAnnotation(ChecksIntents::class.java)
+        requiresIntents = annotation?.enabled ?: false
+
+        if (requiresIntents) {
+            Intents.init()
         }
     }
 
+    override fun finished(description: Description) {
+        super.finished(description)
+
+        if (requiresIntents) {
+            Intents.release()
+        }
+    }
 
     annotation class ChecksIntents(val enabled: Boolean = true)
-
-
-    companion object {
-        fun wrap(block: () -> Unit) {
-            Intents.init()
-            try {
-                block()
-            } finally {
-                Intents.release()
-            }
-        }
-    }
 }

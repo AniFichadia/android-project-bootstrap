@@ -31,6 +31,7 @@ open class BaseUnitTest {
     @After
     fun tearDown() {
         Dispatchers.resetMain()
+        testDispatcher.cleanupTestCoroutines()
     }
 
 

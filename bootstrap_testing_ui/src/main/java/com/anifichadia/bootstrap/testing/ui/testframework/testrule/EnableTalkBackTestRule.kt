@@ -4,9 +4,8 @@ import android.app.UiAutomation
 import android.os.Build
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
-import org.junit.rules.TestRule
+import org.junit.rules.TestWatcher
 import org.junit.runner.Description
-import org.junit.runners.model.Statement
 
 /**
  * @author Aniruddh Fichadia
@@ -14,26 +13,27 @@ import org.junit.runners.model.Statement
  */
 class EnableTalkBackTestRule(
     private val enabled: Boolean = true
-) : TestRule {
+) : TestWatcher() {
 
-    override fun apply(base: Statement, description: Description) = object : Statement() {
-        override fun evaluate() {
-            if (enabled) {
-                ensureAccessibilityServicesUnsuppressed()
-                enableTalkBack()
+    override fun starting(description: Description) {
+        super.starting(description)
 
-                try {
-                    base.evaluate()
-                } finally {
-                    disableTalkBack()
-                }
-            } else {
-                base.evaluate()
-            }
+        if (enabled) {
+            ensureAccessibilityServicesUnsuppressed()
+            enableTalkBack()
         }
     }
 
-    internal fun ensureAccessibilityServicesUnsuppressed() {
+    override fun finished(description: Description) {
+        super.finished(description)
+
+        if (enabled) {
+            disableTalkBack()
+        }
+    }
+
+
+    private fun ensureAccessibilityServicesUnsuppressed() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N) {
             // Updates UI Automation so it doesn't suppress accessibility services
             InstrumentationRegistry.getInstrumentation()
@@ -41,13 +41,13 @@ class EnableTalkBackTestRule(
         }
     }
 
-    internal fun enableTalkBack() {
+    private fun enableTalkBack() {
         with(UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())) {
             executeShellCommand(COMMAND_TALKBACK_ENABLE)
         }
     }
 
-    internal fun disableTalkBack() {
+    private fun disableTalkBack() {
         with(UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())) {
             executeShellCommand(COMMAND_TALKBACK_DISABLE)
         }

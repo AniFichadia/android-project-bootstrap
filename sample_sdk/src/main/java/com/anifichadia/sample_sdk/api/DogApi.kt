@@ -4,6 +4,7 @@ import com.anifichadia.sample_sdk.api.response.ListAllBreedsResponse
 import com.anifichadia.sample_sdk.api.response.RandomImageFromABreedResponse
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.Path
 
 /**

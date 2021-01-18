@@ -6,10 +6,12 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.anifichadia.bootstrap.testing.ui.testframework.espresso.matcher.RecyclerViewPositionMatcher.Companion.atRecyclerViewPosition
+import com.anifichadia.bootstrap.testing.ui.testframework.testrule.DisableAnimationsTestRule
 import com.anifichadia.sampleapp.R
 import com.anifichadia.sampleapp.feature.multiplechoicequiz.question.QuestionFragment
-import com.anifichadia.bootstrap.testing.ui.testframework.espresso.matcher.RecyclerViewPositionMatcher.Companion.atRecyclerViewPosition
 import org.hamcrest.CoreMatchers.allOf
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -19,6 +21,9 @@ import org.junit.runner.RunWith
  */
 @RunWith(AndroidJUnit4::class)
 class QuestionFragmentTest {
+
+    @get:Rule
+    val disableAnimationsTestRule = DisableAnimationsTestRule(true)
 
     @Test
     fun givenConfigProvided_whenUserLaunchesScreen_thenPotentialAnswersShownWithInitialState() {

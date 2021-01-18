@@ -9,10 +9,12 @@ import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.anifichadia.bootstrap.app.framework.mvvm.DelegatingViewModelInitialiser
+import com.anifichadia.bootstrap.app.shared.atomic
 import com.anifichadia.bootstrap.app.shared.weak
 import com.anifichadia.sampleapp.R
 import com.anifichadia.sampleapp.databinding.FragmentMultipleChoiceQuestionBinding
 import com.anifichadia.sampleapp.feature.MvvmFragment
+import com.anifichadia.sampleapp.feature.multiplechoicequiz.MultipleChoiceQuizContract.QuizConfig
 import com.anifichadia.sampleapp.feature.multiplechoicequiz.question._di.DaggerQuestionComponent
 import com.anifichadia.sampleapp.feature.multiplechoicequiz.question._di.QuestionComponent
 import com.anifichadia.sampleapp.feature.multiplechoicequiz.question._di.QuestionModule
@@ -29,6 +31,8 @@ class QuestionFragment : MvvmFragment<FragmentMultipleChoiceQuestionBinding>() {
     private lateinit var viewModel: QuestionContract.ViewModel
 
     private var questionResultObserver: QuestionResultObserver? by weak()
+
+    private var atom: QuizConfig by atomic(QuizConfig())
 
 
     override fun onAttach(context: Context) {

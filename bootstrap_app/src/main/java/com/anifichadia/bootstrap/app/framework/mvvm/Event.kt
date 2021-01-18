@@ -5,6 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer as AndroidXObserver
 
 /**
+ * Note: this is not ideal and I kinda hate this. An event should be consumed formally, and the data shouldn't really be
+ * held this way
+ *
  * @author Aniruddh Fichadia
  * @date 2020-08-13
  */

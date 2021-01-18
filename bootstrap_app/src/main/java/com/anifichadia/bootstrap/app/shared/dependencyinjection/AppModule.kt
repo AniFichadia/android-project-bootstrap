@@ -2,7 +2,7 @@ package com.anifichadia.bootstrap.app.shared.dependencyinjection
 
 import android.content.Context
 import com.anifichadia.bootstrap.app.AppConfiguration
-import com.anifichadia.app.BuildConfig
+import com.anifichadia.bootstrap.app.BuildConfig
 import com.anifichadia.bootstrap.app.framework.dependencyinjection.ApplicationContext
 import com.anifichadia.bootstrap.service.ConnectionConfiguration
 import com.anifichadia.bootstrap.service.ServiceConfiguration
