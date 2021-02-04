@@ -1,18 +1,11 @@
 package com.anifichadia.sampleapp.question
 
 import androidx.fragment.app.testing.launchFragmentInContainer
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.RootMatchers.isDialog
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.anifichadia.bootstrap.testing.ui.testframework.espresso.matcher.RecyclerViewPositionMatcher.Companion.atRecyclerViewPosition
 import com.anifichadia.bootstrap.testing.ui.testframework.testrule.DisableAnimationsTestRule
 import com.anifichadia.sampleapp.R
 import com.anifichadia.sampleapp.feature.multiplechoicequiz.question.QuestionFragment
-import org.hamcrest.CoreMatchers.allOf
+import com.anifichadia.sampleapp.screen.questionScreen
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -31,47 +24,23 @@ class QuestionFragmentTest {
     fun givenConfigProvided_whenUserLaunchesScreen_thenPotentialAnswersShownWithInitialState() {
         launchScreen()
 
-        onView(atRecyclerViewPosition(R.id.multiple_choice_question_recyclerview_answers, 0))
-            .check(
-                matches(
-                    allOf(
-                        withId(R.id.list_item_multiple_choice_quiz_answer_btn_answer),
-                        withText("St Bernard")
-                    )
-                )
-            )
-
-        onView(atRecyclerViewPosition(R.id.multiple_choice_question_recyclerview_answers, 1))
-            .check(
-                matches(
-                    allOf(
-                        withId(R.id.list_item_multiple_choice_quiz_answer_btn_answer),
-                        withText("Corgi")
-                    )
-                )
-            )
-
-        onView(atRecyclerViewPosition(R.id.multiple_choice_question_recyclerview_answers, 2))
-            .check(
-                matches(
-                    allOf(
-                        withId(R.id.list_item_multiple_choice_quiz_answer_btn_answer),
-                        withText("German Shepherd")
-                    )
-                )
-            )
+        questionScreen {
+            assertNumberOfPotentialAnswers(3)
+            assertPotentialAnswerText(0, "St Bernard")
+            assertPotentialAnswerText(1, "Corgi")
+            assertPotentialAnswerText(2, "German Shepherd")
+        }
     }
 
     @Test
     fun whenUserSelectsCorrectAnswer_thenCorrectAnswerConfirmationShown() {
         launchScreen()
 
-        onView(atRecyclerViewPosition(R.id.multiple_choice_question_recyclerview_answers, 2))
-            .perform(click())
+        questionScreen {
+            selectPotentialAnswer(2)
 
-        onView(withId(R.id.alertTitle))
-            .inRoot(isDialog())
-            .check(matches(withText(R.string.multiple_choice_quiz_answered_correctly)))
+            assertCorrectAnswerConfirmationShown()
+        }
     }
 
 
