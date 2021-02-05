@@ -23,36 +23,32 @@ import org.hamcrest.Matcher
 object EspressoOperations {
 
     fun clickView(@IdRes id: Int) = apply {
-        doAfterScrollOnInteraction(withId(id)) {
-            perform(click())
-        }
+        onViewAfterScroll(withId(id))
+            .perform(click())
     }
 
 
     fun waitForViewToBeDisplayed(matcher: Matcher<View>) = apply {
-        doAfterScrollOnInteraction(matcher) {
-            check(matches(isDisplayed()))
-        }
+        onViewAfterScroll(matcher)
+            .check(matches(isDisplayed()))
     }
 
 
     //region Input
     fun inputTypeText(@IdRes id: Int, text: String) = apply {
-        doAfterScrollOnInteraction(withId(id)) {
-            perform(replaceText(text))
-        }
+        onViewAfterScroll(withId(id))
+            .perform(replaceText(text))
     }
 
     fun inputTypeIndividualCharacters(@IdRes id: Int, text: String) = apply {
-        doAfterScrollOnInteraction(withId(id)) {
-            perform(typeText(text))
-        }
+        onViewAfterScroll(withId(id))
+            .perform(typeText(text))
+
     }
 
     fun inputClearText(@IdRes id: Int) {
-        doAfterScrollOnInteraction(withId(id)) {
-            perform(clearText())
-        }
+        onViewAfterScroll(withId(id))
+            .perform(clearText())
     }
     //endregion
 
@@ -64,21 +60,15 @@ object EspressoOperations {
         } catch (e: Throwable) {
             // Swallowed
         }
-    }
-
-    fun doAfterScroll(matcher: Matcher<View>, action: () -> Unit) = apply {
-        safeScrollToView(matcher)
 
         onView(matcher)
             .perform(waitFor(isDisplayingAtLeast(90)))
-
-        action()
     }
 
-    fun doAfterScrollOnInteraction(matcher: Matcher<View>, block: ViewInteraction.() -> Unit) = apply {
-        doAfterScroll(matcher) {
-            val viewInteraction = onView(matcher)
-            block.invoke(viewInteraction)
-        }
+
+    fun onViewAfterScroll(matcher: Matcher<View>): ViewInteraction {
+        safeScrollToView(matcher)
+
+        return onView(matcher)
     }
 }

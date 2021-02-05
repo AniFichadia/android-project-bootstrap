@@ -8,7 +8,6 @@ import androidx.test.espresso.matcher.RootMatchers.isDialog
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.anifichadia.bootstrap.testing.ui.testframework.espresso.EspressoOperations.doAfterScrollOnInteraction
 import com.anifichadia.bootstrap.testing.ui.testframework.espresso.matcher.RecyclerViewPositionMatcher.Companion.atRecyclerViewPosition
 import com.anifichadia.bootstrap.testing.ui.testframework.testrule.DisableAnimationsTestRule
 import com.anifichadia.sampleapp.R
