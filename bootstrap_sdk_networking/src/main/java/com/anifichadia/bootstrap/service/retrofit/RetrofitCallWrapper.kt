@@ -2,11 +2,6 @@ package com.anifichadia.bootstrap.service.retrofit
 
 import com.anifichadia.bootstrap.service.ApiResult
 import com.anifichadia.bootstrap.service.ApiResult.Failure
-import com.anifichadia.bootstrap.service.ApiResult.FailureType.ResponseMapping
-import com.anifichadia.bootstrap.service.ApiResult.FailureType.ResponseWithStatus
-import com.anifichadia.bootstrap.service.ApiResult.FailureType.ResponseWithStatusAndError
-import com.anifichadia.bootstrap.service.ApiResult.FailureType.Ssl
-import com.anifichadia.bootstrap.service.ApiResult.FailureType.UnclassifiedException
 import com.anifichadia.bootstrap.service.ApiResult.Success
 import com.anifichadia.bootstrap.service.ResponseMapper
 import retrofit2.Call
@@ -58,9 +53,9 @@ class RetrofitCallWrapper<NetworkResponseT, MappedT, NetworkErrorResponseT, Erro
                 try {
                     val data = responseMapper.map(response, response.body())
 
-                    return Success<MappedT, ErrorT>(httpStatusCode, data)
+                    return Success(httpStatusCode, data)
                 } catch (e: Throwable) {
-                    return Failure<MappedT, ErrorT>(ResponseMapping(httpStatusCode, e, true))
+                    return Failure.ResponseMapping(httpStatusCode, e, true)
                 }
             } else {
                 val errorBody = response.errorBody()
@@ -72,18 +67,18 @@ class RetrofitCallWrapper<NetworkResponseT, MappedT, NetworkErrorResponseT, Erro
                         val errorNetworkResponse = responseConverter.convert(errorBody)
                         val error = errorResponseMapper.map(response, errorNetworkResponse)
 
-                        return Failure(ResponseWithStatusAndError(httpStatusCode, error))
+                        return Failure.ResponseWithStatusAndError(httpStatusCode, error)
                     } catch (e: Throwable) {
-                        return Failure(ResponseMapping(httpStatusCode, e, false))
+                        return Failure.ResponseMapping(httpStatusCode, e, false)
                     }
                 } else {
-                    return Failure(ResponseWithStatus(httpStatusCode))
+                    return Failure.ResponseWithStatus(httpStatusCode)
                 }
             }
         } catch (e: SSLException) {
-            return Failure(Ssl(e))
+            return Failure.Ssl(e)
         } catch (e: Throwable) {
-            return Failure(UnclassifiedException(e))
+            return Failure.UnclassifiedException(e)
         }
     }
 }

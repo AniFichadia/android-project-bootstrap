@@ -13,34 +13,29 @@ sealed class ApiResult<DataT, ErrorT> {
         val data: DataT
     ) : ApiResult<DataT, ErrorT>()
 
-    class Failure<DataT, ErrorT>(
-        val failureType: FailureType<ErrorT>
-    ) : ApiResult<DataT, ErrorT>()
+    sealed class Failure<DataT, ErrorT> : ApiResult<DataT, ErrorT>() {
 
-
-    sealed class FailureType<ErrorT> {
-
-        open class ResponseWithStatus<ErrorT>(
+        open class ResponseWithStatus<DataT, ErrorT>(
             val httpStatusCode: Int
-        ) : FailureType<ErrorT>()
+        ) : Failure<DataT, ErrorT>()
 
-        class ResponseWithStatusAndError<ErrorT>(
+        class ResponseWithStatusAndError<DataT, ErrorT>(
             httpStatusCode: Int,
             val error: ErrorT
-        ) : ResponseWithStatus<ErrorT>(httpStatusCode)
+        ) : ResponseWithStatus<DataT, ErrorT>(httpStatusCode)
 
-        class ResponseMapping<ErrorT>(
+        class ResponseMapping<DataT, ErrorT>(
             httpStatusCode: Int,
             val throwable: Throwable,
             val failedOnSuccessBody: Boolean
-        ) : ResponseWithStatus<ErrorT>(httpStatusCode)
+        ) : ResponseWithStatus<DataT, ErrorT>(httpStatusCode)
 
-        class Ssl<ErrorT>(
+        class Ssl<DataT, ErrorT>(
             val sslException: SSLException
-        ) : FailureType<ErrorT>()
+        ) : Failure<DataT, ErrorT>()
 
-        class UnclassifiedException<ErrorT>(
+        class UnclassifiedException<DataT, ErrorT>(
             val throwable: Throwable
-        ) : FailureType<ErrorT>()
+        ) : Failure<DataT, ErrorT>()
     }
 }
