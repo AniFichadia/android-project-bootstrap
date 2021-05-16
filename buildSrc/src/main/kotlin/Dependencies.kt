@@ -25,16 +25,15 @@ import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.ExternalModuleDependency
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.artifacts.dsl.RepositoryHandler
-import org.gradle.internal.impldep.org.junit.experimental.categories.Categories.CategoryFilter.exclude
 import org.gradle.kotlin.dsl.accessors.runtime.addDependencyTo
 import org.gradle.kotlin.dsl.kotlin
 
 object Versions {
-    const val androidGradlePluginVersion = "4.1.1"
+    const val androidGradlePluginVersion = "4.2.1"
     const val desugarJdkVersion = "1.0.10"
 
-    const val kotlinVersion = "1.4.20"
-    const val kotlinCoroutinesVersion = "1.3.9"
+    const val kotlinVersion = "1.5.0"
+    const val kotlinCoroutinesVersion = "1.4.3"
 
     const val androidXArchCoreVersion = "2.1.0"
     const val androidXLifecycleVersion = "2.2.0"
@@ -49,10 +48,10 @@ object Versions {
 
     const val timberVersion = "4.7.1"
 
-    const val daggerVersion = "2.29.1"
+    const val daggerVersion = "2.35.1"
 
     const val retrofitVersion = "2.9.0"
-    const val okhttpVersion = "4.9.0"
+    const val okhttpVersion = "4.9.1"
 
     const val junitVersion = "4.12"
     const val mockitoVersion = "3.5.13"
@@ -61,7 +60,7 @@ object Versions {
     const val androidXEspressoVersion = "3.3.0"
     const val androidXTestVersion = "1.3.0"
     const val uiAutomatorVersion = "2.2.0"
-    const val baristaVersion = "3.7.0"
+    const val baristaVersion = "3.9.0"
 }
 
 
@@ -220,6 +219,7 @@ object Deps {
 object Repos {
     fun default(scope: RepositoryHandler) = scope.apply {
         google()
+        mavenCentral()
         jcenter()
     }
 }

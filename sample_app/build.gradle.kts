@@ -1,9 +1,4 @@
-import Versions.androidXEspressoVersion
-import Versions.androidXFragmentVersion
-import Versions.androidXJunitVersion
-import Versions.androidXTestVersion
 import Versions.desugarJdkVersion
-import Versions.uiAutomatorVersion
 
 plugins {
     id("com.android.application")
