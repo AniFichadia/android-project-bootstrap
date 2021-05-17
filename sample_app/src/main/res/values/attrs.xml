@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TwoLabelView">
+        <attr name="label1Text" format="reference|string" />
+        <attr name="label1ContentDescription" format="reference|string" />
+        <attr name="label2Text" format="reference|string" />
+        <attr name="label2ContentDescription" format="reference|string" />
+    </declare-styleable>
+</resources>

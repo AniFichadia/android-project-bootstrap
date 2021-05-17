@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:parentTag="com.anifichadia.sampleapp.TwoLabelViewView">
+
+    <!-- Note: this view hierarchy is purposely convoluted -->
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/two_label_label_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="this is the first label" />
+
+            <TextView
+                android:id="@+id/two_label_label_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                tools:text="this is the second label" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</merge>

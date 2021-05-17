@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Androidprojectbootstrap"
-        tools:replace="android:name,android:theme" >
+        tools:replace="android:name,android:theme">
 
         <!-- Note: being a bit cheeky and locking the orientation to portrait for simplicity -->
         <activity
@@ -32,6 +32,8 @@
         <activity
             android:name=".feature.quizresults.QuizResultsActivity"
             android:screenOrientation="portrait" />
+
+        <activity android:name="com.anifichadia.bootstrap.testing.ui.testframework.UiComponentTestActivity" />
 
     </application>
 
