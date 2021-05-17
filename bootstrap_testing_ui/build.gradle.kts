@@ -71,6 +71,8 @@ dependencies {
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:$desugarJdkVersion")
 
     Deps.kotlin(this)
+    Deps.logging(this)
+    Deps.androidArchitecture(this)
     Deps.androidUi(this)
 
     Deps.unitTest(this)
