@@ -1,21 +1,19 @@
 package com.anifichadia.sampleapp.question
 
 import androidx.fragment.app.testing.launchFragmentInContainer
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.anifichadia.bootstrap.testing.ui.testframework.testrule.DisableAnimationsTestRule
 import com.anifichadia.sampleapp.R
 import com.anifichadia.sampleapp.feature.multiplechoicequiz.question.QuestionFragment
 import com.anifichadia.sampleapp.screen.questionScreen
+import com.karumi.shot.ScreenshotTest
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 
 /**
  * @author Aniruddh Fichadia
  * @date 2020-08-01
  */
-@RunWith(AndroidJUnit4::class)
-class QuestionFragmentTest {
+class QuestionFragmentTest : ScreenshotTest {
 
     @get:Rule
     val disableAnimationsTestRule = DisableAnimationsTestRule(true)

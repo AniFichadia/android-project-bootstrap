@@ -5,6 +5,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("kapt")
+    id("shot")
 }
 
 android {
@@ -20,7 +21,7 @@ android {
 
         multiDexEnabled = true
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.karumi.shot.ShotTestRunner"
         testInstrumentationRunnerArgument("clearPackageData", "true")
 
         testOptions {
@@ -85,6 +86,10 @@ android {
         exclude("META-INF/AL2.0")
         exclude("META-INF/LGPL2.1")
     }
+}
+
+shot {
+    tolerance = 0.001
 }
 
 dependencies {
