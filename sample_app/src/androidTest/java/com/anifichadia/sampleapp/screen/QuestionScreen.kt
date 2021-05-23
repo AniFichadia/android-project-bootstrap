@@ -3,8 +3,11 @@ package com.anifichadia.sampleapp.screen
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.RootMatchers.isDialog
+import androidx.test.espresso.matcher.ViewMatchers.isEnabled
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
+import com.anifichadia.bootstrap.testing.ui.testframework.espresso.EspressoOperations.waitForCondition
+import com.anifichadia.bootstrap.testing.ui.testframework.espresso.matcher.RecyclerViewPositionMatcher.Companion.atRecyclerViewPosition
 import com.anifichadia.sampleapp.R
 import com.schibsted.spain.barista.assertion.BaristaListAssertions.assertDisplayedAtPosition
 import com.schibsted.spain.barista.assertion.BaristaListAssertions.assertListItemCount
@@ -18,6 +21,11 @@ class QuestionScreen internal constructor() {
     // NOTE! Interactions should be named semantically. Don't describe the action (eg. "tap", "click"), describe more of the outcome (eg. user "selects")
     //region Interactions
     fun selectPotentialAnswer(position: Int) {
+        waitForCondition(
+            atRecyclerViewPosition(R.id.multiple_choice_question_recyclerview_answers, position),
+            isEnabled()
+        )
+
         clickListItem(R.id.multiple_choice_question_recyclerview_answers, position)
     }
     //endregion
