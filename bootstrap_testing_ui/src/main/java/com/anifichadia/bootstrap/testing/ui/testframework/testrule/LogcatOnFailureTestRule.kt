@@ -2,6 +2,9 @@ package com.anifichadia.bootstrap.testing.ui.testframework.testrule
 
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
+import kotlinx.coroutines.TimeoutCancellationException
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withTimeout
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 import java.util.concurrent.TimeUnit
@@ -69,18 +72,22 @@ $testOutputLines
     }
 
     private fun retrieveLogcatOutput(): String? {
-        val (exitCode, output) = runProcess(COMMAND_LOGCAT_EXPORT, 5L)
+        val (exitCode, output) = runProcess(COMMAND_LOGCAT_EXPORT, 500L)
         return if (exitCode == 0) output else null
     }
 
     private fun runProcess(command: String, timeoutMs: Long? = null): Pair<Int, String> {
         val process = Runtime.getRuntime().exec(command)
-        val processExitCode = if (VERSION.SDK_INT >= VERSION_CODES.O && timeoutMs != null) {
-            try {
-                process.waitFor(timeoutMs, TimeUnit.MILLISECONDS)
-                process.exitValue()
-            } catch (e: InterruptedException) {
-                -1
+
+        val processExitCode = if (timeoutMs != null) {
+            runBlocking {
+                try {
+                    withTimeout(timeoutMs) {
+                        process.exitValue()
+                    }
+                } catch (e: TimeoutCancellationException) {
+                    -1
+                }
             }
         } else {
             process.waitFor()

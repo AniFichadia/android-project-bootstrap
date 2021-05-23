@@ -7,6 +7,8 @@ import androidx.test.espresso.ViewAction
 import androidx.test.espresso.util.HumanReadables
 import org.hamcrest.CoreMatchers.anything
 import org.hamcrest.Matcher
+import org.hamcrest.StringDescription
+import java.util.concurrent.TimeoutException
 
 /**
  * @author Aniruddh Fichadia
@@ -21,7 +23,10 @@ class WaitViewAction private constructor(
     @Suppress("UNCHECKED_CAST")
     override fun getConstraints(): Matcher<View> = anything() as Matcher<View>
 
-    override fun getDescription(): String = "wait"
+    override fun getDescription(): String = StringDescription()
+        .appendText("Waiting for condition: ")
+        .appendDescriptionOf(condition)
+        .toString()
 
     override fun perform(uiController: UiController, view: View) {
         uiController.loopMainThreadUntilIdle()
@@ -36,6 +41,7 @@ class WaitViewAction private constructor(
         throw PerformException.Builder()
             .withViewDescription(HumanReadables.describe(view))
             .withActionDescription(description)
+            .withCause(TimeoutException("$description failed after $timeoutMs ms"))
             .build()
     }
 

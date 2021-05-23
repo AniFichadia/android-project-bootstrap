@@ -36,15 +36,15 @@ object Versions {
     const val kotlinCoroutinesVersion = "1.4.3"
 
     const val androidXArchCoreVersion = "2.1.0"
-    const val androidXLifecycleVersion = "2.2.0"
-    const val androidXAnnotationsVersion = "1.1.0"
+    const val androidXLifecycleVersion = "2.3.1"
+    const val androidXAnnotationsVersion = "1.2.0"
 
     const val androidXCoreVersion = "1.3.2"
     const val androidXAppCompatVersion = "1.2.0"
-    const val androidXFragmentVersion = "1.2.5"
-    const val androidMaterialUiVersion = "1.2.1"
-    const val androidXConstraintLayoutVersion = "2.0.2"
-    const val androidXRecyclerViewVersion = "1.1.0"
+    const val androidXFragmentVersion = "1.3.3"
+    const val androidMaterialUiVersion = "1.3.0"
+    const val androidXConstraintLayoutVersion = "2.0.4"
+    const val androidXRecyclerViewVersion = "1.2.0"
 
     const val timberVersion = "4.7.1"
 
@@ -84,7 +84,7 @@ object Deps {
         implementation("androidx.arch.core:core-runtime:$androidXArchCoreVersion")
 
         implementation("androidx.lifecycle:lifecycle-common:$androidXLifecycleVersion")
-        implementation("androidx.lifecycle:lifecycle-extensions:$androidXLifecycleVersion")
+        implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
         implementation("androidx.lifecycle:lifecycle-livedata:$androidXLifecycleVersion")
         implementation("androidx.lifecycle:lifecycle-viewmodel:$androidXLifecycleVersion")
 

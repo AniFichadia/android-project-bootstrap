@@ -10,11 +10,14 @@ import androidx.test.espresso.action.ViewActions.replaceText
 import androidx.test.espresso.action.ViewActions.scrollTo
 import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.BoundedMatcher
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayingAtLeast
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import com.anifichadia.bootstrap.testing.ui.testframework.espresso.viewaction.WaitViewAction.Companion.waitFor
+import org.hamcrest.Description
 import org.hamcrest.Matcher
+import org.hamcrest.Matchers.allOf
 
 /**
  * @author Aniruddh Fichadia
@@ -31,6 +34,40 @@ object EspressoOperations {
     fun waitForViewToBeDisplayed(matcher: Matcher<View>) = apply {
         onViewAfterScroll(matcher)
             .check(matches(isDisplayed()))
+    }
+
+    inline fun <reified ViewT: View> waitForCondition(
+        @IdRes id: Int,
+        conditionDescription: String? = null,
+        crossinline condition: (ViewT) -> Boolean,
+    ) = waitForCondition(withId(id), conditionDescription, condition)
+
+    inline fun <reified ViewT : View> waitForCondition(
+        viewMatcher: Matcher<View>,
+        conditionDescription: String? = null,
+        crossinline condition: (ViewT) -> Boolean,
+    ) {
+        val conditionMatcher = object : BoundedMatcher<View, ViewT>(ViewT::class.java) {
+            override fun describeTo(description: Description) {
+                conditionDescription?.let(description::appendText)
+            }
+
+            override fun matchesSafely(item: ViewT): Boolean = condition(item)
+        }
+
+        waitForCondition(viewMatcher, allOf(isDisplayed(), conditionMatcher))
+    }
+
+    fun waitForCondition(
+        @IdRes id: Int,
+        condition: Matcher<View>,
+    ) = waitForCondition(withId(id), condition)
+
+    fun waitForCondition(
+        viewMatcher: Matcher<View>,
+        condition: Matcher<View>,
+    ) {
+        onView(viewMatcher).perform(waitFor(condition))
     }
 
 

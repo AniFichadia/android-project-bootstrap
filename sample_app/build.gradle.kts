@@ -105,7 +105,8 @@ dependencies {
     Deps.networkingStack(this)
 
     Deps.unitTest(this)
+    
+    Deps.androidUiTest(this)
     androidTestImplementation(project(":bootstrap_testing_ui"))
 
-    Deps.androidUiTest(this)
 }

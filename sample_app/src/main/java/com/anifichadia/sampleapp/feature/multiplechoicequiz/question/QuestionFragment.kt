@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.core.os.bundleOf
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.anifichadia.bootstrap.app.framework.mvvm.DelegatingViewModelInitialiser
@@ -128,10 +129,10 @@ class QuestionFragment : MvvmFragment<FragmentMultipleChoiceQuestionBinding>() {
                 arguments = createArgs(potentialAnswers, answer, answerImageUrl)
             }
 
-        fun createArgs(potentialAnswers: List<String>, answer: String, answerImageUrl: String) = Bundle().apply {
-            putStringArrayList(KEY_POTENTIAL_ANSWERS, ArrayList(potentialAnswers))
-            putString(KEY_ANSWER, answer)
-            putString(KEY_ANSWER_IMAGE_URL, answerImageUrl)
-        }
+        fun createArgs(potentialAnswers: List<String>, answer: String, answerImageUrl: String) = bundleOf(
+            KEY_POTENTIAL_ANSWERS to ArrayList(potentialAnswers),
+            KEY_ANSWER to answer,
+            KEY_ANSWER_IMAGE_URL to answerImageUrl,
+        )
     }
 }

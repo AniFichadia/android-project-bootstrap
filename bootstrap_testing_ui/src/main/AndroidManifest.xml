@@ -2,4 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.anifichadia.bootstrap.testing.ui">
 
+    <application>
+        <activity android:name=".testframework.UiComponentTestActivity" />
+    </application>
 </manifest>

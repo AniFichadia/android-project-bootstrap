@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import com.anifichadia.sampleapp.R
 import com.anifichadia.sampleapp.databinding.ActivityQuizResultsBinding
 import pl.droidsonroids.gif.GifDrawable
@@ -47,8 +48,17 @@ class QuizResultsActivity : AppCompatActivity() {
 
         fun newInstance(context: Context, correctAnswers: Int, questionCount: Int) =
             Intent(context, QuizResultsActivity::class.java).apply {
-                putExtra(KEY_CORRECT_ANSWERS, correctAnswers)
-                putExtra(KEY_QUESTION_COUNT, questionCount)
+                putExtras(
+                    createArgs(
+                        correctAnswers,
+                        questionCount,
+                    )
+                )
             }
+
+        fun createArgs(correctAnswers: Int, questionCount: Int) = bundleOf(
+            KEY_CORRECT_ANSWERS to correctAnswers,
+            KEY_QUESTION_COUNT to questionCount,
+        )
     }
 }
