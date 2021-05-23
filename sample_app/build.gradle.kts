@@ -5,6 +5,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("kapt")
+    id("com.facebook.testing.screenshot")
 }
 
 android {
@@ -20,7 +21,7 @@ android {
 
         multiDexEnabled = true
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.anifichadia.sampleapp.AppTestRunner"
         testInstrumentationRunnerArgument("clearPackageData", "true")
 
         testOptions {
@@ -110,4 +111,5 @@ dependencies {
     Deps.androidUiTest(this)
     androidTestImplementation(project(":bootstrap_testing_ui"))
 
+    androidTestImplementation("com.facebook.testing.screenshot:layout-hierarchy-common:0.14.0")
 }

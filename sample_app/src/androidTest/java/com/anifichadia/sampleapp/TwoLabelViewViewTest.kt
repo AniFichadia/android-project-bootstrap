@@ -10,6 +10,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.anifichadia.bootstrap.testing.ui.testframework.launchComponent
 import com.anifichadia.bootstrap.testing.ui.testframework.testrule.DisableAnimationsTestRule
+import com.facebook.testing.screenshot.Screenshot
 import org.hamcrest.Matchers.allOf
 import org.hamcrest.Matchers.not
 import org.junit.Rule
@@ -31,7 +32,7 @@ class TwoLabelViewViewTest {
     fun whenBothLabelsSet_thenBothLabelsShown() {
         val viewId = View.generateViewId()
 
-        launchComponent(::TwoLabelViewView) {
+        val scenario = launchComponent(::TwoLabelViewView) {
             id = viewId
             label1Text = "label1Text"
             label2Text = "label2Text"
@@ -42,13 +43,20 @@ class TwoLabelViewViewTest {
                 hasDescendant(allOf(withId(R.id.two_label_label_1), withText("label1Text"))),
                 hasDescendant(allOf(withId(R.id.two_label_label_2), withText("label2Text"))),
             )))
+
+        scenario.onActivity { activity ->
+            Screenshot
+                .snapActivity(activity)
+                .setName("TwoLabelViewViewTest.whenBothLabelsSet_thenBothLabelsShown")
+                .record()
+        }
     }
 
     @Test
     fun whenLabel2NotSet_thenLabel2NotShown() {
         val viewId = View.generateViewId()
 
-        launchComponent(::TwoLabelViewView) {
+        val scenario = launchComponent(::TwoLabelViewView) {
             id = viewId
             label1Text = "label1Text"
             label2Text = null
@@ -59,5 +67,12 @@ class TwoLabelViewViewTest {
                 hasDescendant(allOf(withId(R.id.two_label_label_1), withText("label1Text"))),
                 hasDescendant(allOf(withId(R.id.two_label_label_2), not(isDisplayed()))),
             )))
+
+        scenario.onActivity { activity ->
+            Screenshot
+                .snapActivity(activity)
+                .setName("TwoLabelViewViewTest.whenLabel2NotSet_thenLabel2NotShown")
+                .record()
+        }
     }
 }
