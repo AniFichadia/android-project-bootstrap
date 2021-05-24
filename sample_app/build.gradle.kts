@@ -1,4 +1,5 @@
 import Versions.desugarJdkVersion
+import Versions.timberVersion
 
 plugins {
     id("com.android.application")
@@ -98,7 +99,7 @@ dependencies {
     implementation("pl.droidsonroids.gif:android-gif-drawable:1.2.19")
 
     Deps.kotlin(this)
-    Deps.logging(this)
+    implementation("com.jakewharton.timber:timber:$timberVersion")
     Deps.dependencyInjection(this)
     Deps.androidArchitecture(this)
     Deps.androidUi(this)
