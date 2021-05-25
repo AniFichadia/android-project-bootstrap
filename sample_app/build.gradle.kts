@@ -25,7 +25,7 @@ android {
         testInstrumentationRunnerArgument("clearPackageData", "true")
 
         testOptions {
-            execution = "ANDROIDX_TEST_ORCHESTRATOR"
+//            execution = "ANDROIDX_TEST_ORCHESTRATOR"
         }
     }
 
@@ -78,7 +78,7 @@ android {
     }
 
     testOptions {
-        execution = "ANDROIDX_TEST_ORCHESTRATOR"
+//        execution = "ANDROIDX_TEST_ORCHESTRATOR"
         unitTests.isReturnDefaultValues = true
     }
 
