@@ -16,6 +16,7 @@
         <!-- Note: being a bit cheeky and locking the orientation to portrait for simplicity -->
         <activity
             android:name=".feature.MainActivity"
+            android:exported="true"
             android:screenOrientation="portrait">
 
             <intent-filter>
@@ -27,13 +28,17 @@
 
         <activity
             android:name=".feature.multiplechoicequiz.MultipleChoiceQuizActivity"
+            android:exported="true"
             android:screenOrientation="portrait" />
 
         <activity
             android:name=".feature.quizresults.QuizResultsActivity"
+            android:exported="true"
             android:screenOrientation="portrait" />
 
-        <activity android:name="com.anifichadia.bootstrap.testing.ui.testframework.UiComponentTestActivity" />
+        <activity
+            android:name="com.anifichadia.bootstrap.testing.ui.testframework.UiComponentTestActivity"
+            android:exported="true" />
 
     </application>
 

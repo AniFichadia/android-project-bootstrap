@@ -13,8 +13,8 @@ android {
         minSdkVersion(CommonAndroidConfig.minSdkVersion)
         targetSdkVersion(CommonAndroidConfig.targetSdkVersion)
 
-        versionCode = 1
-        versionName = "1.0"
+//        versionCode = 1
+//        versionName = "1.0"
 
         multiDexEnabled = true
 
@@ -53,7 +53,7 @@ android {
 
     buildTypes {
         getByName("debug") {
-            isDebuggable = true
+//            isDebuggable = true
             isMinifyEnabled = false
 
 //            TODO: enable
@@ -61,7 +61,7 @@ android {
         }
 
         getByName("release") {
-            isDebuggable = false
+//            isDebuggable = false
             isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
 

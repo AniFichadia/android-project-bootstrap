@@ -10,8 +10,8 @@ android {
         minSdkVersion(CommonAndroidConfig.minSdkVersion)
         targetSdkVersion(CommonAndroidConfig.targetSdkVersion)
 
-        versionCode = 1
-        versionName = "1.0"
+//        versionCode = 1
+//        versionName = "1.0"
 
         consumerProguardFile("consumer-rules.pro")
 

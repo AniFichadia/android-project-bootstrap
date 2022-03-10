@@ -10,8 +10,8 @@ android {
         minSdkVersion(CommonAndroidConfig.minSdkVersion)
         targetSdkVersion(CommonAndroidConfig.targetSdkVersion)
 
-        versionCode = 1
-        versionName = "1.0"
+//        versionCode = 1
+//        versionName = "1.0"
 
         multiDexEnabled = true
 
@@ -38,12 +38,12 @@ android {
 
     buildTypes {
         getByName("debug") {
-            isDebuggable = true
+//            isDebuggable = true
             isMinifyEnabled = false
         }
 
         getByName("release") {
-            isDebuggable = false
+//            isDebuggable = false
             isMinifyEnabled = false
         }
     }

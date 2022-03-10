@@ -29,11 +29,11 @@ import org.gradle.kotlin.dsl.accessors.runtime.addDependencyTo
 import org.gradle.kotlin.dsl.kotlin
 
 object Versions {
-    const val androidGradlePluginVersion = "4.2.1"
+    const val androidGradlePluginVersion = "7.1.2"
     const val desugarJdkVersion = "1.0.10"
 
-    const val kotlinVersion = "1.5.0"
-    const val kotlinCoroutinesVersion = "1.4.3"
+    const val kotlinVersion = "1.6.10"
+    const val kotlinCoroutinesVersion = "1.6.0"
 
     const val androidXArchCoreVersion = "2.1.0"
     const val androidXLifecycleVersion = "2.3.1"
@@ -48,7 +48,7 @@ object Versions {
 
     const val timberVersion = "4.7.1"
 
-    const val daggerVersion = "2.35.1"
+    const val daggerVersion = "2.39.1"
 
     const val retrofitVersion = "2.9.0"
     const val okhttpVersion = "4.9.1"
@@ -276,4 +276,3 @@ private fun DependencyHandler.`debugImplementation`(
 
 private fun DependencyHandler.`androidTestUtil`(dependencyNotation: Any): Dependency? =
     add("androidTestUtil", dependencyNotation)
-
