@@ -96,7 +96,7 @@ dependencies {
     implementation(project(":bootstrap_sdk_networking"))
 
     implementation("com.squareup.picasso:picasso:2.71828")
-    implementation("pl.droidsonroids.gif:android-gif-drawable:1.2.23")
+    implementation("pl.droidsonroids.gif:android-gif-drawable:1.2.27")
 
     Deps.kotlin(this)
     implementation("com.jakewharton.timber:timber:$timberVersion")
